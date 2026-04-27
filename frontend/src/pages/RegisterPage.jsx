@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { saveAuth } from "../utils/auth";
 import { useTheme } from "../context/ThemeContext";
 
-const API = "http://127.0.0.1:8000";
+import API from "../utils/config";
 
 
 

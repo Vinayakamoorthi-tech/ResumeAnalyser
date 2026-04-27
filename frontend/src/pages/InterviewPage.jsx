@@ -3,7 +3,7 @@ import { authHeaders } from "../utils/auth";
 import { useTheme } from "../context/ThemeContext";
 import { useNotifications } from "../context/NotificationContext";
 
-const API = "http://127.0.0.1:8000";
+import API from "../utils/config";
 const MAX_ROUNDS = 5;
 
 function scoreColor(s, max = 10) {

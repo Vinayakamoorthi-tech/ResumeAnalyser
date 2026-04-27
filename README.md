@@ -117,7 +117,7 @@ cd frontend
 npm install
 
 # Create .env file
-echo "VITE_API_URL=http://127.0.0.1:8000" > .env
+echo "VITE_API_URL=https://resumeanalyser-gupc.onrender.com" > .env
 
 # Run dev server
 npm run dev

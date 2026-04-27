@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import { useTheme } from "../context/ThemeContext";
 import { useNotifications } from "../context/NotificationContext";
 
-const API = "http://127.0.0.1:8000";
+import API from "../utils/config";
 
 function ScoreRing({ score, size = 120, label = "Resume quality score", theme }) {
   const r    = 52;

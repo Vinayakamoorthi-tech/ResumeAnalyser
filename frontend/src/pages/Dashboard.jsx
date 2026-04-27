@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { authHeaders } from "../utils/auth";
 import { useTheme } from "../context/ThemeContext";
 
-const API = "http://127.0.0.1:8000";
+import API from "../utils/config";
 
 function scoreColor(s, max = 100) {
   const p = s / max;

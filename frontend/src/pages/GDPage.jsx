@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { authHeaders } from "../utils/auth";
 import { useTheme } from "../context/ThemeContext";
 
-const API = "http://127.0.0.1:8000";
+import API from "../utils/config";
 
 const GD_TOPICS = [
   "Artificial Intelligence will replace human jobs",

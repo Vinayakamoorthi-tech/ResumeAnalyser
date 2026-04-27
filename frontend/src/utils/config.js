@@ -1,2 +1,2 @@
-const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const API = import.meta.env.VITE_API_URL || "https://resumeanalyser-gupc.onrender.com";
 export default API;
