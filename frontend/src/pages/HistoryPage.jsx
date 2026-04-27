@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { authHeaders } from "../utils/auth";
 import { useTheme } from "../context/ThemeContext";
 
-const API = import.meta.env.VITE_API_URL || "https://resumeanalyser-gupc.onrender.com";
-
+const API = import.meta.env.VITE_API_URL
 function scoreColor(s, max = 10) {
   const p = s / max;
   return p >= 0.7 ? "#22c55e" : p >= 0.4 ? "#f59e0b" : "#ef4444";
