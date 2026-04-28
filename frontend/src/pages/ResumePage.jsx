@@ -3,7 +3,7 @@ import { authHeaders } from "../utils/auth";
 import jsPDF from "jspdf";
 import { useTheme } from "../context/ThemeContext";
 import { useNotifications } from "../context/NotificationContext";
-
+import { glassCard } from "../utils/theme";
 import API from "../utils/config";
 
 function ScoreRing({ score, size = 120, label = "Resume quality score", theme }) {
@@ -60,13 +60,7 @@ export default function ResumePage() {
   const [error, setError]           = useState("");
   const { addNotification } = useNotifications();
 
-  const card = {
-    background: theme.surface,
-    border: `1px solid ${theme.border}`,
-    borderRadius: "16px",
-    padding: "24px",
-    boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.06)",
-  };
+  const card = glassCard(theme, isDark, { padding: "24px" });
 
   const textareaStyle = {
     width: "100%", minHeight: "180px",

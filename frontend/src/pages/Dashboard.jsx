@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { authHeaders } from "../utils/auth";
 import { useTheme } from "../context/ThemeContext";
-
+import { glassCard } from "../utils/theme";
 import API from "../utils/config";
 
 function scoreColor(s, max = 100) {
@@ -113,12 +113,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const card = {
-    background: theme.surface,
-    border: `1px solid ${theme.border}`,
-    borderRadius: "16px",
-    padding: "22px 24px",
-  };
+  const card = glassCard(theme, isDark, { padding: "22px 24px" });
 
   function load() {
     setLoading(true); setError("");

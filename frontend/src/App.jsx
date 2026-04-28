@@ -99,7 +99,7 @@ function ThemeToggle() {
 // FIND the return in MobileBottomNav, add this after the MOBILE_NAV.map:
 function MobileBottomNav({ onMoreClick }) {   // ← add onMoreClick prop
   const { pathname } = useLocation();
-  const { theme } = useTheme();
+  const { theme,isDark } = useTheme();
 
   return (
     <div style={{
@@ -140,7 +140,7 @@ function MobileBottomNav({ onMoreClick }) {   // ← add onMoreClick prop
 
 // ── Mobile top header with hamburger ─────────────────────────────────────────
 function MobileHeader({ onMenuOpen }) {
-  const { theme } = useTheme();
+  const { theme,isDark } = useTheme();
   
 
   return (
@@ -422,7 +422,7 @@ function Protected({ children }) {
 function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
   const isMobile = useIsMobile();
 
   return (
@@ -453,25 +453,96 @@ function AppLayout({ children }) {
 }
 
 export default function App() {
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
 
   return (
-    <div style={{ minHeight: "100vh", background: theme.bg, color: theme.textPrimary }}>
+    <div style={{
+      minHeight: "100vh",
+      color: theme.textPrimary,
+      background: isDark
+        ? "radial-gradient(ellipse at 20% 20%, #1a1040 0%, #0a0a0f 40%, #000510 100%)"
+        : "radial-gradient(ellipse at 20% 20%, #dde4ff 0%, #eef0f7 40%, #e8ecf8 100%)",
+    }}>
       <style>{`
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: ${theme.bg}; font-family: 'Inter', 'Segoe UI', sans-serif; color: ${theme.textPrimary}; }
-        @keyframes spin    { to { transform: rotate(360deg); } }
-        @keyframes fadeUp  { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse   { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        @keyframes bounce  { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+        body {
+          font-family: 'Inter', 'Segoe UI', sans-serif;
+          background: ${isDark
+            ? "radial-gradient(ellipse at 20% 20%, #1a1040 0%, #0a0a0f 40%, #000510 100%)"
+            : "radial-gradient(ellipse at 20% 20%, #dde4ff 0%, #eef0f7 40%, #e8ecf8 100%)"};
+          min-height: 100vh;
+          color: ${theme.textPrimary};
+        }
+
+        /* Animated background orbs */
+        body::before {
+          content: '';
+          position: fixed;
+          top: -20%;
+          left: -10%;
+          width: 60vw;
+          height: 60vw;
+          background: ${isDark
+            ? "radial-gradient(circle, rgba(91,138,240,0.12) 0%, transparent 70%)"
+            : "radial-gradient(circle, rgba(67,97,238,0.1) 0%, transparent 70%)"};
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 0;
+          animation: float1 20s ease-in-out infinite;
+        }
+        body::after {
+          content: '';
+          position: fixed;
+          bottom: -20%;
+          right: -10%;
+          width: 50vw;
+          height: 50vw;
+          background: ${isDark
+            ? "radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%)"
+            : "radial-gradient(circle, rgba(114,9,183,0.07) 0%, transparent 70%)"};
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 0;
+          animation: float2 25s ease-in-out infinite;
+        }
+
+        @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(5%,5%) scale(1.05)} }
+        @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-5%,-5%) scale(1.08)} }
+        @keyframes spin   { to { transform: rotate(360deg); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse  { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
         @keyframes shimmer { from{background-position:200% 0} to{background-position:-200% 0} }
-        .fade-in { animation: fadeUp 0.35s ease both; }
+
+        .fade-in { animation: fadeUp 0.4s ease both; }
+
+        /* Glass card utility */
+        .glass-card {
+          background: ${theme.glass};
+          backdrop-filter: ${theme.glassBlur};
+          -webkit-backdrop-filter: ${theme.glassBlur};
+          border: 1px solid ${theme.glassBorder};
+          border-radius: 20px;
+          position: relative;
+          overflow: hidden;
+        }
+        .glass-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 1px;
+          background: ${theme.glassHighlight};
+        }
+
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: ${theme.border}; border-radius: 4px; }
         ::placeholder { color: ${theme.textMuted}; }
         textarea, input { outline: none; font-family: inherit; }
-        textarea:focus, input:focus { border-color: ${theme.primary} !important; box-shadow: 0 0 0 3px ${theme.primaryGlow} !important; }
+        textarea:focus, input:focus {
+          border-color: ${theme.primary} !important;
+          box-shadow: 0 0 0 3px ${theme.primaryGlow} !important;
+        }
         a { text-decoration: none; }
       `}</style>
 
