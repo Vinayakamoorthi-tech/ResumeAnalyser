@@ -144,15 +144,22 @@ export default function GDPage() {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) { alert("Voice input not supported. Use Chrome."); return; }
     const r = new SR();
-    r.lang = "en-US"; r.continuous = true; r.interimResults = true;
+    r.lang = "en-US"; r.continuous = false; r.interimResults = false;
     recognitionRef.current = r;
     r.onstart  = () => setListening(true);
     r.onend    = () => setListening(false);
     r.onerror  = () => setListening(false);
     r.onresult = (e) => {
-      let t = "";
-      for (let i = 0; i < e.results.length; i++) t += e.results[i][0].transcript;
-      setInput(t);
+      let finalTranscript = "";
+      let interimTranscript = "";
+      for (let i = 0; i < e.results.length; i++) {
+        if (e.results[i].isFinal) {
+          finalTranscript += e.results[i][0].transcript;
+        } else {
+          interimTranscript += e.results[i][0].transcript;
+        }
+      }
+      setInput(finalTranscript || interimTranscript);
     };
     r.start();
   }
