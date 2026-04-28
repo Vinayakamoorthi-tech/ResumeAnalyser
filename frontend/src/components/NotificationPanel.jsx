@@ -52,8 +52,8 @@ export default function NotificationBell() {
       {open && (
         <div style={{
           position: "fixed",
-          top: "60px",
-          right: "16px",
+          bottom: "120px",
+          left: "76px",
           width: "340px",
           maxHeight: "480px",
           background: theme.surface,
