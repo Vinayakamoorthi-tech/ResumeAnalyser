@@ -364,22 +364,22 @@ function Sidebar({ collapsed, setCollapsed }) {
 
         {/* Bottom */}
         <div style={{ padding: collapsed ? "10px 8px" : "10px", borderTop: `1px solid ${theme.border}`, display: "flex", flexDirection: "column", gap: "8px" }}>
-          <div style={{ display: "flex", justifyContent: collapsed ? "center" : "space-between", alignItems: "center" }}>
-            <ThemeToggle />
-            {!collapsed && (
-              <>
-                <span style={{ color: theme.textSecondary, fontSize: "13px", marginLeft: "10px", alignSelf: "center", flex: 1 }}>
-                  {isDark ? "Dark Mode" : "Light Mode"}
-                </span>
-                <NotificationBell />
-              </>
-            )}
-            {collapsed && (
-              <div style={{ marginTop: "6px" }}>
-                <NotificationBell />
-              </div>
-            )}
-          </div>
+          {collapsed ? (
+            // Collapsed — show icons vertically centered with gap
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+              <ThemeToggle />
+              <NotificationBell />
+            </div>
+          ) : (
+            // Expanded — show in a row with label
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <ThemeToggle />
+              <span style={{ color: theme.textSecondary, fontSize: "12px", flex: 1, whiteSpace: "nowrap" }}>
+                {isDark ? "Dark" : "Light"}
+              </span>
+              <NotificationBell />
+            </div>
+          )}
           {user && (
             collapsed ? (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
