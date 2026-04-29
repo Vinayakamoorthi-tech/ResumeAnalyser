@@ -299,10 +299,16 @@ function Sidebar({ collapsed, setCollapsed }) {
 
       <div style={{
         width: collapsed ? "64px" : "240px", minHeight: "100vh", flexShrink: 0,
-        background: theme.sidebar, borderRight: `1px solid ${theme.border}`,
+        background: theme.sidebar,
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
+        borderRight: `1px solid ${theme.glassBorder}`,
         display: "flex", flexDirection: "column",
         position: "fixed", top: 0, left: 0, bottom: 0, zIndex: 50,
         transition: "width 0.25s cubic-bezier(0.4,0,0.2,1)", overflow: "hidden",
+        boxShadow: isDark
+          ? "4px 0 24px rgba(0,0,0,0.3), inset -1px 0 0 rgba(255,255,255,0.05)"
+          : "4px 0 24px rgba(0,0,0,0.08), inset -1px 0 0 rgba(255,255,255,0.8)",
       }}>
         {/* Logo */}
         <div style={{ padding: collapsed ? "16px 0" : "16px 14px", borderBottom: `1px solid ${theme.border}`, display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "space-between", gap: "8px" }}>

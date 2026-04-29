@@ -144,7 +144,7 @@ export default function GDPage() {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) { alert("Voice input not supported. Use Chrome."); return; }
     const r = new SR();
-    r.lang = "en-US"; r.continuous = false; r.interimResults = false;
+    r.lang = "en-US"; r.continuous = true; r.interimResults = true;
     recognitionRef.current = r;
     r.onstart  = () => setListening(true);
     r.onend    = () => setListening(false);
@@ -159,7 +159,12 @@ export default function GDPage() {
           interimTranscript += e.results[i][0].transcript;
         }
       }
-      setInput(finalTranscript || interimTranscript);
+      const newText = finalTranscript || interimTranscript;
+      // Append to existing input instead of replacing
+      setInput(prev => {
+        if (!prev.trim()) return newText;
+        return prev.trim() + " " + newText;
+      });
     };
     r.start();
   }
