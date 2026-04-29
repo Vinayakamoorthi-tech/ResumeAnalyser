@@ -187,8 +187,8 @@ interview/
 ## 🔑 Environment Variables
 
 ### Backend `.env`
-GROQ_API_KEY=your_groq_api_key
+GROQ_API_KEY= Api_key
 
 ### Frontend `.env`
-VITE_API_URL=https://your-backend.onrender.com
+VITE_API_URL=https://resumeanalyser-gupc.onrender.com
 
