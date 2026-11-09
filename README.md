@@ -2,10 +2,6 @@
 
 > Problem Statement: #26ENCL2 — CareerLaunch: AI-Powered Placement Preparation Suite
 
-## 🚀 Live Demo
-- **Frontend:** https://placementai.vercel.app
-- **Backend:** https://placementai-backend.onrender.com
-
 ---
 
 ## 📌 What is PlacementAI?
